@@ -42,6 +42,14 @@ public class Main {
         numberOfCustomers = Integer.parseInt(input.nextLine());
     }
 
+    public static boolean checkRemain(Counter[] counterArray){
+        for(int i=0;i<counterArray.length;i++){
+            if(counterArray[i].getAvailability()==false){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -84,7 +92,7 @@ public class Main {
             checkStatus(customer); //here customer will be assign to 2 queues according to their status
         }
 
-        while(!NVIP.isEmpty()||!VIP.isEmpty()){
+        while(!NVIP.isEmpty()||!VIP.isEmpty()||checkRemain(counterArray)){
             /*Below is the code to check whether the counter done processing a customer*/
             for(int i=0;i<counterArray.length;i++){
                 if(counterArray[i].getAvailability()==false){
@@ -105,7 +113,7 @@ public class Main {
                             counterArray[j].add((Customer) VIP.dequeue()); //availability = false
                             customerCounter++;
                             counterArray[j].setProcessTime(c.getTicket());
-                            counterArray[j].setEndTime();
+                            counterArray[j].setEndTime(globalTime);
                             display(c,counterArray[j]);
                             continue;
                         }
@@ -116,7 +124,7 @@ public class Main {
                             counterArray[j].add((Customer) NVIP.dequeue()); //availability = false
                             customerCounter++;
                             counterArray[j].setProcessTime(c.getTicket());
-                            counterArray[j].setEndTime();
+                            counterArray[j].setEndTime(globalTime);
                             display(c,counterArray[j]);
                             continue;
                         }
@@ -126,6 +134,7 @@ public class Main {
             globalTime++;
         }
 
+        System.out.println("Total completion time: " + (globalTime-1));
     }
 
 }
