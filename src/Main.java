@@ -21,16 +21,16 @@ public class Main {
 
     public static void display(Customer c, Counter counter){
         if(c.getStatus()=='N')
-            System.out.println("|" + c.getArrival() + " |" + globalTime + " |" + counter.getEndTime() + " |" + counter.getProcessTime() + " |" +  (globalTime-c.getArrival()) + " | Normal | " + counter.getLabel());
+            System.out.printf("|%-10d|%-20d|%-15d|%-20d|%-15d|%-8s|%-8c\n",c.getArrival(),globalTime,counter.getEndTime(),counter.getProcessTime(),(globalTime-c.getArrival()),"Normal",counter.getLabel());
         else if(c.getStatus()=='V')
-            System.out.println("|" + c.getArrival() + " |" + globalTime + " |" + counter.getEndTime() + " |" + counter.getProcessTime() + " |" +  (globalTime-c.getArrival()) + " | VIP | " + counter.getLabel());
+            System.out.printf("|%-10d|%-20d|%-15d|%-20d|%-15d|%-8s|%-8c\n",c.getArrival(),globalTime,counter.getEndTime(),counter.getProcessTime(),(globalTime-c.getArrival()),"VIP",counter.getLabel());
     }
 
     public static void sortCounter(Counter[] counters){
         for(int i=1;i<counters.length;i++){
             int j;
             Counter current = counters[i];
-            for(j=i-1;j<counters.length && current.getProcessTime()<counters[j].getProcessTime();j--){
+            for(j=i-1;j>=0 && current.getTimeRequired()<counters[j].getTimeRequired();j--){
                 counters[j+1] = counters[j];
             }
             counters[j+1] = current;
@@ -72,7 +72,9 @@ public class Main {
 
         getNumberOfCustomers(); //get number of customer
         numberOfCustomers = input.nextInt();
-        System.out.println("|Arrival Time |Start Processing |End Time |Processing Time |Waiting Time |Status |Counter ");
+        System.out.printf("|%-10s|%-20s|%-15s|%-20s|%-15s|%-8s|%-8s|\n","Arrival","Start Processing","End Processing","Processing Time","Waiting Time", "Queue", "Counter");
+
+
 
         while(input.hasNext()){
             int arriveTime = input.nextInt(); //get arrive time
@@ -86,8 +88,6 @@ public class Main {
             /*Below is the code to check whether the counter done processing a customer*/
             for(int i=0;i<counterArray.length;i++){
                 if(counterArray[i].getAvailability()==false){
-//                    System.out.println(counterArray[i].getLabel() + " " + counterArray[i].getEndTime());
-//                    System.out.println("Global Time: " + globalTime);
                     if(counterArray[i].getEndTime()==globalTime){
                         counterArray[i].remove();
                     }
@@ -103,8 +103,6 @@ public class Main {
                         Customer c = (Customer) VIP.getFirst();
                         if(c.getArrival()<=globalTime){  //if time ngam then assign the VIP to the counter
                             counterArray[j].add((Customer) VIP.dequeue()); //availability = false
-
-//                            System.out.println("Customer is added.");
                             customerCounter++;
                             counterArray[j].setProcessTime(c.getTicket());
                             counterArray[j].setEndTime();
@@ -116,7 +114,6 @@ public class Main {
                         Customer c = (Customer) NVIP.getFirst();
                         if(c.getArrival()<=globalTime){  //if time ngam then assign the NVIP to the counter
                             counterArray[j].add((Customer) NVIP.dequeue()); //availability = false
-//                            System.out.println("Customer is added.");
                             customerCounter++;
                             counterArray[j].setProcessTime(c.getTicket());
                             counterArray[j].setEndTime();

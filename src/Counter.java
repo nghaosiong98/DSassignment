@@ -64,4 +64,8 @@ public class Counter <E> {
     public char getLabel(){
         return this.label;
     }
+
+    public int getTimeRequired() {
+        return timeRequired;
+    }
 }
