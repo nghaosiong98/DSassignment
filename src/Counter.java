@@ -32,12 +32,6 @@ public class Counter <E> {
         processTime = n * timeRequired;
     }
 
-//    public void resetTime(){
-//        this.processTime = 0;
-//        this.endTime = 0;
-//        this.availability = true;
-//    }
-
     public void setAvailability(boolean availability) {
         this.availability = availability;
     }
@@ -50,10 +44,10 @@ public class Counter <E> {
         return processTime;
     }
 
-    public void setEndTime(){
+    public void setEndTime(int globalTime){
         if(!slot.isEmpty()){
             int arrival = slot.get(0).getArrival();
-            endTime = arrival + getProcessTime();
+            endTime = globalTime + getProcessTime();  //globalTime means current time.
         }
     }
 
