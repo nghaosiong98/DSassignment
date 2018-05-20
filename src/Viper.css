@@ -1,0 +1,53 @@
+.root{
+    
+    -fx-background-color: #3333ff
+}
+
+#vbox{
+    -fx-background-color:  #33ffcc
+    
+}
+
+.label{
+    -fx-font-weight: bold
+
+}
+#donebtn{
+    -fx-background-color:#ccff00
+}
+#nocust{
+    -fx-font-size : 15px ;
+    -fx-text-fill:#000000
+      
+}
+#title3{
+    -fx-font-size: 30px;
+    -fx-text-fill:#000000;
+    -fx-font-weight:bold 
+   
+        
+}
+#time{
+    -fx-font-size:20px;
+    -fx-text-fill:#ff0000;
+   
+}
+#scenethree{
+    -fx-background-color:#33ffcc
+}
+#pane{
+    -fx-background-color:#33ffcc
+}
+#profit{
+    -fx-font-size:20px;
+    -fx-text-fill:#000099
+}
+#nprice{
+        -fx-font-size : 15px ;
+    -fx-text-fill:#000000
+      
+}
+#vprice{
+      -fx-font-size : 15px ;
+    -fx-text-fill:#000000
+}
